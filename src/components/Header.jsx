@@ -1,12 +1,38 @@
-import React, { useState } from 'react';
+import React from 'react'
+import { useState } from 'react'
+import {app} from '../components/firbase'
+import { getAuth, createUserWithEmailAndPassword,onAuthStateChanged,signOut } from "firebase/auth";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useHistory } from "react-router-dom";
+import { useEffect } from 'react';
 
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const history = useHistory();
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
+  const [loged,setLoged]=useState(false)
+  const auth = getAuth(app);
+  useEffect(()=>{
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+          setLoged(true)
+      }
+       else {
+        setLoged(false)
+      }
+    });
+  })
+  const signout=()=>{
+    signOut(auth).then(() => {
+      history.push('/login')
+    }).catch((error) => {
 
+    });
+  }
   return (
     <nav className="bg-pink-500 sm:full m-auto lg:w-3/4 lg:mt-2 mt-0  " >
       <div className=" mx-auto px-4 sm:px-6 lg:px-8">
@@ -21,7 +47,12 @@ function Header() {
                 <a href="#" className=" hover:bg-[#dd2562] hover:text-white px-3 py-2 rounded-md  text-white font-semibold text-lg">About</a>
                 <a href="#" className=" hover:bg-[#dd2562] hover:text-white px-3 py-2 rounded-md  text-white font-semibold text-lg">Contact</a>
                 </div>
-                <button className="hover:bg-[#dd2562] border border-white rounded py-1 px-6  right-8  text-white font-semibold text-lg">Check Now</button>
+                 {
+                  loged? 
+                   <button onClick={signout} className="hover:bg-[#dd2562] border border-white rounded py-1 px-6  right-8  text-white font-semibold text-lg">Sign out</button>
+                   :
+                   <button onClick={()=>{ history.push('/login')}} className="hover:bg-[#dd2562] border border-white rounded py-1 px-6  right-8  text-white font-semibold text-lg">Sign In</button>
+                  }
               </div>
             </div>
           </div>

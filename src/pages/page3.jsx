@@ -4,6 +4,7 @@ import AboutUs from '../components/AboutUs'
 import HomeGallery from '../components/HomeGallery'
 import Footer from '../components/Footer'
 import Video from '../components/Video'
+
 const page3 = () => {
   return (
     <div>

@@ -10,7 +10,7 @@ const Form = () => {
     const onDrop = useCallback(acceptedFiles => {
        setSelectedImages(acceptedFiles)
        console.log(acceptedFiles)
-       console.log("hello")
+       console.log("hello   ")
      }, [])
     const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
 
