@@ -48,7 +48,7 @@
 
 
 import React from "react";
-
+import { Link } from "react-router-dom";
 const Footer = () => {
   return (
 
@@ -68,7 +68,7 @@ const Footer = () => {
             <div className="grid grid-flow-row grid-cols-2 gap-y-4 gap-28">
             <span className="my-2"><a href="#" className=" text-md hover:text-blue-500">Home</a></span>
             <span className="my-2"><a href="#" className=" text-md hover:text-blue-500">PhotoBooth</a></span>
-            <span className="my-2"><a href="#" className=" text-md hover:text-blue-500">Save The Date</a></span>
+            <span className="my-2"><a href="#" className=" text-md hover:text-blue-500"><Link to={'/form'}>Save The Date</Link></a></span>
             <span className="my-2"><a href="#" className=" text-md hover:text-blue-500">Save The Pricing</a></span>  
             </div>
             </div>

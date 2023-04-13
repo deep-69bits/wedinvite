@@ -21,7 +21,7 @@ function App() {
                 <Route path="/page2">
                   <Page2/>
                 </Route>
-                <Route path="/page3">
+                <Route path="/invite">
                   <Page1/>
                 </Route>
                 <Route path="/form">
