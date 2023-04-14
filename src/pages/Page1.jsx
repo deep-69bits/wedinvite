@@ -25,6 +25,7 @@ function Page1() {
     const [date,setDate]=useState(null)
     const [addres,setAdress]=useState('This Address, Street 71,Amsterdam')
     const [topgallery,setTopgalley]=useState([])
+    const [itinerary,setIntinerary]=useState([])
    useEffect(()=>{
     
       const retrivedata=async()=>{
@@ -42,6 +43,7 @@ function Page1() {
           data.push(docSnap.data().pics[1])
           data.push(docSnap.data().pics[2])
           setTopgalley(data)
+          setIntinerary(docSnap.data()?.itineraryfields)
         } else {
           // docSnap.data() will be undefined in this case
           console.log("No such document!");
@@ -56,7 +58,7 @@ function Page1() {
       <HeroSection groom={groom} bride={bride} />
       <Carousel Gallery={topgallery}/>
       <Countdown date={date} address={addres} />
-      <Itinerary/>
+      <Itinerary date={date} itinerary={itinerary} />
       {
         
         <Gallery/>

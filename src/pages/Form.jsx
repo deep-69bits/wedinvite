@@ -31,6 +31,7 @@ const Form = () => {
     const [email, setEmail] = useState('')
     const history = useHistory()
     const [selectedImages, setSelectedImages] = useState([])
+    const [itinerary,setItinerary]=useState(true)
     const onDrop = useCallback(acceptedFiles => {
         setSelectedImages(acceptedFiles)
         console.log(acceptedFiles)
@@ -56,6 +57,32 @@ const Form = () => {
     }
     const [load,setLoaad]=useState(false)
     const storage = getStorage(app);
+    
+    const [formfields,setFromfields]=useState([
+        {time:'',title:'',description:''},
+    ])
+    
+    const handleFormchange=(event,index)=>{
+        console.log(index)
+        console.log(event.target.name)
+        let data=[...formfields]
+        data[index][event.target.name]=event.target.value
+        setFromfields(data)
+    }
+    
+    const addfields =()=>{
+        let object={
+            time:'',title:'',description:''
+        }
+        setFromfields([...formfields,object])
+        setLoaad(load)
+    }
+    
+    const removefield=(index)=>{
+        let data=[...formfields]
+        data.splice(index,1)
+        setFromfields(data)
+    }
     const submitdata = () => {
         if(needpics){
               console.log("hello")
@@ -100,7 +127,9 @@ const Form = () => {
                         gallery: needpics,
                         rsvp:rsvp,
                         address:eventadress,
-                        pics: gallery
+                        pics: gallery,
+                        itinerary: itinerary,
+                        itineraryfields: formfields
                     });
                     console.log(docref)
                 }
@@ -119,8 +148,7 @@ const Form = () => {
                         date: eventdate,
                         gallery: needpics,
                         rsvp:rsvp,
-                        address:eventadress,
-                        pics: gallery
+                        
                     });
                     console.log(docref)
                 }
@@ -198,6 +226,76 @@ const Form = () => {
                     </div> :
                     null
             }
+            <div className='lg:w-2/4 w-full bg my-10 m-auto lg:flex block  justify-between '>
+                <label htmlFor="events">Itinerary</label>
+                <Checkbox
+                    name="my-input"
+                    checked={true}
+                    onChange={(value, event) => {
+                        let p = {
+                            isTrue: value,
+                        };
+                        setItinerary(!itinerary)
+                        console.log(event);
+                    }}
+                    borderColor="pink"
+                    style={{ cursor: "pointer" }}
+                    borderRadius={10}
+                    className="text-pink-500"
+                    labelStyle={{ marginLeft: 5, userSelect: "none" }}
+                    label=""
+                />
+            </div>
+
+             {
+                itinerary?
+                <div className='lg:w-2/4 w-full bg my-10 m-auto '>
+                 {
+                    formfields.map((item,index)=>{
+                        return(
+                            <div key={index} className="my-8" >
+                             <div className=' flex justify-between'>
+                             <input type="text" placeholder='time'
+                             name='time'
+                             onChange={event=>handleFormchange(event,index)}
+                             value={item.time}
+                             className='w-full mr-3 border-[1px] my-1 border-pink-500 focus:outline-none focus:border-pink-700  block rounded-2xl px-3 py-2'
+                             />
+                             
+                             <input type="text" placeholder='title'
+                             name='title'
+                             onChange={event=>handleFormchange(event,index)}
+                             value={item.title}
+                             className='border-[1px] w-full my-1 border-pink-500 focus:outline-none focus:border-pink-700  block rounded-2xl px-3 py-2'
+                             />
+                             
+                             
+                             </div>
+                             <input type="text" placeholder='description'
+                             name='description'
+                             onChange={event=>handleFormchange(event,index)}
+                             value={item.description}
+                             className='border-[1px] w-full h-28 my-1 border-pink-500 focus:outline-none focus:border-pink-700  block rounded-2xl px-3 py-2'
+                             />
+                             <button className=" inline-block rounded border-2 border-danger px-6 pb-[6px] pt-2 text-xs  uppercase leading-normal text-danger transition duration-150 ease-in-out hover:border-danger-600  focus:border-danger-600 focus:text-danger-600 focus:outline-none focus:ring-0 active:border-danger-700 active:text-danger-700  bg-pink-500 font-bold text-white mx-auto " onClick={()=>{removefield(index)}}>remove</button>
+                            </div>
+                        );
+                    })
+                 }
+                </div>
+                :
+                <div></div>
+
+            }
+            {
+                itinerary?
+                <div  className='flex items-center'>
+                 <button className='w-1/2 mx-auto border-[1px] border-pink-500 text-center py-2' onClick={addfields}>Add more</button>
+                </div>
+                :<div></div>
+            }
+
+
             <div className='lg:w-2/4 w-full bg my-10 m-auto lg:flex block  justify-between '>
                 <label htmlFor="events">RSVP</label>
                 <Checkbox
