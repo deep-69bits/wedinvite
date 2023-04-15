@@ -12,8 +12,12 @@ const page3 = () => {
     <div>
      <Header/>
       <Video/>
+      <section id='gallery'>
       <HomeGallery/>
+      </section>
+      <section id='about'>
       <AboutUs/>
+      </section>
      <div className='bg-pink-500'>
      <Footer />
      </div>
