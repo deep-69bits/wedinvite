@@ -6,6 +6,7 @@ import Page3 from './pages/page3'
 import Form from './pages/Form';
 import SignUp from './pages/SignUp';
 import LogIn from './pages/LogIn';
+import ForgetPassword from './pages/ForgetPassword'
 function App() {
   return (
     
@@ -32,6 +33,9 @@ function App() {
               </Route>
               <Route path="/login">
                  <LogIn/>
+              </Route>
+              <Route path="/forgetpassword">
+                 <ForgetPassword/>
               </Route>
               </Switch>
             </div>
