@@ -13,24 +13,31 @@ const SignUp = () => {
   const [name,setName]=useState('');
   const [email,setEmail]=useState('')
   const [password,setPassword]=useState('')
+  const [confirmpassword,setConfirmPassword]=useState('')
   const [load,setLoad]=useState('')
   const auth = getAuth(app);
    
   const signup=()=>{
     console.log("hello")
-    createUserWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      toast("Signed Up")
-     const user = userCredential.user;
-     user.displayName=name;
-     console.log(user)
-     setTimeout(function(){history.push('/')}, 2000);
-  })
-  .catch((error) => {
-    toast("Can't Sign Up ")
-    const errorCode = error.code;
-    const errorMessage = error.message;
-  });
+    if(password!=confirmpassword){
+      toast("Passwrod doesn't match")
+    }
+    else{
+
+      createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        toast("Signed Up")
+        const user = userCredential.user;
+        user.displayName=name;
+        console.log(user)
+        setTimeout(function(){history.push('/')}, 2000);
+      })
+      .catch((error) => {
+        toast("Can't Sign Up ")
+        const errorCode = error.code;
+        const errorMessage = error.message;
+      });
+    }
   }
 
   useEffect(()=>{
@@ -64,11 +71,9 @@ const SignUp = () => {
                 <div className="text-center bg-white text-black">
                   <img
                     className="mx-auto w-48"
-                    src="https://tecdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/lotus.webp"
+                    src="https://ik.imagekit.io/cmef8hxb6/1_Transparent_Image_VWmbhlojN.png?updatedAt=1681756446542"
                     alt="logo" />
-                  <h4 className="mb-12 mt-1 pb-1 text-xl font-semibold">
-                    We are The Lotus Team
-                  </h4>
+                 
                 </div>
 
                 <form>
@@ -125,6 +130,24 @@ const SignUp = () => {
                    
                   </div>
 
+                  <div className="relative mb-4 mt-2" data-te-input-wrapper-init>
+                  <label for="1" class="block px-2 my-2 w-full pb-1 text-sm font-medium text-gray-500 transition-all duration-200 ease-in-out group-focus-within:text-blue-400">Confirm Password</label>
+                    <input
+                      type="password"
+                      className="peer h-10 w-full rounded-md bg-gray-50 px-4 font-thin outline-none drop-shadow-sm transition-all duration-200 ease-in-out focus:bg-white text-black mx-2 focus:ring-2 focus:ring-blue-400"
+                      id="exampleFormControlInput11"
+                      placeholder="Confirm Password" 
+                      value={confirmpassword}
+                      onChange={
+                        (e)=>{
+                          setConfirmPassword(e.target.value)
+                          setLoad('')
+                        }
+                      }
+                      />
+                   
+                  </div>
+
                  
                   <div className="mb-12 pb-1 pt-1 text-center">
                     <button
@@ -158,18 +181,9 @@ const SignUp = () => {
 
           
             <div
-              className="bg-gradient-to-r from-pink-500 via-pink-800 to-pink-500 flex items-center rounded-b-lg lg:w-6/12 lg:rounded-r-lg lg:rounded-bl-none">
+              className="bg-gradient-to-r flex items-center rounded-b-lg lg:w-6/12 lg:rounded-r-lg lg:rounded-bl-none">
               <div className="px-4 py-6 text-white md:mx-6 md:p-12">
-                <h4 className="mb-6 text-xl font-semibold">
-                  We are more than just a company
-                </h4>
-                <p className="text-sm">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing
-                  elit, sed do eiusmod tempor incididunt ut labore et
-                  dolore magna aliqua. Ut enim ad minim veniam, quis
-                  nostrud exercitation ullamco laboris nisi ut aliquip ex
-                  ea commodo consequat.
-                </p>
+              <lottie-player src="https://assets10.lottiefiles.com/packages/lf20_hy4txm7l.json"  background="transparent"  speed="1"  loop  autoplay></lottie-player>
               </div>
             </div>
           </div>
