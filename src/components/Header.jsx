@@ -21,11 +21,13 @@ function Header() {
   const [loged, setLoged] = useState(false)
   const [profilemenu,setprofilemenu]=useState(false)
   const auth = getAuth(app);
+  const [name,setName]=useState('')
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         console.log(user.photoURL)
-        setProfilepic(user.photoURL)
+        setProfilepic(user.photoURL )
+        setName(user.displayName || "User")
         setLoged(true)
       }
       else {
@@ -47,7 +49,9 @@ function Header() {
           <div className="flex items-center w-full">
             <div className="hidden md:block w-full">
               <div className="ml-10 flex items-baseline justify-between space-x-4">
-                <div className=" font text-white font-semibold text-lg"> MOMENTOUS </div>
+                <div className=" font text-white font-semibold text-lg"> 
+                 <img className='w-20 absolute h-20 scale-[200%]  cursor-pointer mt-[-40px]' src="https://ik.imagekit.io/cmef8hxb6/1_Transparent_Image_VWmbhlojN.png?updatedAt=1681756446542" alt="" />
+                 </div>
                 <div>
                   <a to="/" href='/'  className=" hover:bg-[#dd2562] hover:text-white px-3 py-2 rounded-md  text-white font-semibold text-lg">Home</a>
                 
@@ -63,6 +67,10 @@ function Header() {
                       {
                         profilemenu?
                         <ul className=' text-center absolute border-[1px] border-white rounded-md translate-x-[-180px] translate-y-[20px] z-40 bg-pink-500 h-fit  w-44  '>
+                        <li className='hover:bg-[#dd2562] w-full  rounded py-3   right-8  text-white font-semibold text-lg'>
+                         {name}
+                        </li>
+                        <li><hr /></li>
                         <li className='hover:bg-[#dd2562] w-full  rounded py-3   right-8  text-white font-semibold text-lg'>
                         <a href='/form'>Save The Date</a>
                         </li>
