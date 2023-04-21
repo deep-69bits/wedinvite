@@ -5,7 +5,7 @@ import Gallery from "../components/Gallery";
 import Header from "../components/Header";
 import HeroSection from "../components/HeroSection";
 import Itinerary from "../components/Itinerary";
-import RSVP from "../components/RSVP";
+import {RSVP} from "../components/RSVP";
 import { useSearchParams } from "react-router-dom";
 import { getFirestore } from "firebase/firestore";
 import { doc, getDoc } from "firebase/firestore";
