@@ -58,7 +58,9 @@ const Footer = () => {
         <div className="sm:flex sm:mt-8">
           <div className="mt-8 sm:mt-0 sm:w-full sm:px-8 flex flex-col md:flex-row justify-between">
             <div className="flex flex-col">
-              <span className="font-light  text-6xl uppercase mb-2">LA</span>
+              <span className="font-light  text-6xl uppercase mb-2">
+              <img className="w-20 h-20 scale-[300%] translate-x-10" src="https://ik.imagekit.io/cmef8hxb6/1_Transparent_Image_VWmbhlojN.png?updatedAt=1681756446542" alt="" />
+              </span>
               <span className="my-2"><a href="#" className=" text-md hover:text-blue-500">+1(7635) 547-12-97</a></span>
               <span className="my-2"><a href="#" className="  text-md hover:text-blue-500">support@lift.agency</a></span>
               
